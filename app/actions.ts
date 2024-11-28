@@ -5,7 +5,8 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import { GoogleAIFileManager } from "@google/generative-ai/server";
 import fs from "fs";
 import path from 'path';
-
+import { collection, addDoc } from "firebase/firestore";
+import  db  from '@/app/utils/fireStore';
 
 
 export async function uploadAndProcessFile(formData: FormData) {
@@ -70,5 +71,22 @@ export async function uploadAndProcessFile(formData: FormData) {
       details: error.message,
       status: 500,
     };
+  }
+}
+
+/**
+ * Save a document to a Firestore collection.
+ * @param {string} collectionName - The name of the Firestore collection.
+ * @param {Object} data - The document data to save.
+ * @returns {Promise<string>} - The ID of the saved document.
+ */
+export async function saveDoc(collectionName: string, data: object): Promise<string> {
+  try {
+    const docRef = await addDoc(collection(db, collectionName), data);
+    console.log("Document written with ID: ", docRef.id);
+    return docRef.id;
+  } catch (error) {
+    console.error("Error adding document: ", error);
+    throw error;
   }
 }
