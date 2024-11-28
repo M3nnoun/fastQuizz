@@ -7,12 +7,15 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { FileUp, Send } from 'lucide-react';
-import { submitFormToGoogleAI } from './actions';
+import { uploadAndProcessFile } from '@/app/actions';
+import  db  from '@/app/utils/fireStore';
+import { collection, addDoc } from 'firebase/firestore';
 
-export default function FileUploader() {
+export default function FileUploader({afterSubmit}) {
   const [file, setFile] = useState<File | null>(null);
   const [prompt, setPrompt] = useState('');
-
+  const [error, setError] = useState<string | null>(null);
+  const [response, setResponse] = useState<string | null>(null);
   // Handle file selection
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
   const selectedFile = event.target.files?.[0];
@@ -28,24 +31,45 @@ export default function FileUploader() {
 };
   // Handle form submission
   const handleSubmit = async (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-    const formData = new FormData(event.currentTarget);
+    event.preventDefault(); // Prevent default button behavior
 
+    if (!file) {
+      alert("Please upload a PDF file");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("prompt", prompt);
+    console.log("in the form");
+    console.log(formData);
     try {
       const result = await uploadAndProcessFile(formData);
       if (result.error) {
         setError(result.error);
       } else {
         setResponse(result.response);
+        const responseDoc = {
+          userid:'placeholder',
+          prompt,
+          questions: JSON.parse(result.response),
+          fileName: file.name,
+          uploadedAt: new Date(),
+        };
+        const docRef = await addDoc(collection(db, "quizes"), responseDoc);
+        console.log("Document written with ID: ", docRef.id);
+        afterSubmit(docRef.id);
+        console.log(JSON.parse(result.response));
       }
-    } catch (err: any) {
-      console.error(err);
+    } catch (error: any) {
+      console.error(error);
       setError("Something went wrong");
     }
   };
+  
 
   return (
-    <div className="container mx-auto p-4 max-w-2xl py-32">
+    <div className="container mx-auto p-4 max-w-2xl py-32 mt-8">
       <Card className="w-full">
         <CardHeader>
           <CardTitle className="text-2xl font-bold text-center">PDF Analysis Demo</CardTitle>
