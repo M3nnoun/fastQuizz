@@ -14,16 +14,19 @@ export default function Page({
   const [quiz, setQuiz] = useState<Quiz | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-
+  const [quizId, setquizId] = useState<string | null>(null);
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
         const slug = (await params).slug;
+        setquizId(slug);
         const docRef = doc(db, "quizes", slug);
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
           const data = docSnap.data() as Quiz;
+          console.log(data);
           // Ensure the structure matches the expected `Quiz`
           if (data && Array.isArray(data.questions)) {
             setQuiz(data);
@@ -48,5 +51,5 @@ export default function Page({
   if (error) return <div>Error: {error}</div>;
   if (!quiz) return <div>No quiz data available</div>;
 
-  return <QuizForm quiz={quiz} />;
+  return <QuizForm quiz={quiz} quizId={quizId} />;
 }
