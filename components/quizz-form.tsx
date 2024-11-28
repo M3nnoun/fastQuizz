@@ -15,8 +15,10 @@ import { Button } from "@/components/ui/button";
 import { Quiz, QuizQuestion } from "@/types/quiz";
 import { useToast } from "@/hooks/use-toast";
 import { StudentInfoCard } from "./student-info-card";
+import { saveDoc } from '@/app/actions';
 
-export default function QuizForm({ quiz }: { quiz: Quiz }) {
+
+export default function QuizForm({ quiz,quizId }: { quiz: Quiz,quizId: string }) {
   // this a bug i will fix it later
   // this code not show the last Item,
   // i will dipplicate the last item
@@ -63,8 +65,6 @@ export default function QuizForm({ quiz }: { quiz: Quiz }) {
       setCurrentQuestion((prev) => prev + 1);
       setStartTime(Date.now()); // Restart the timer for the new question
     }
-    console.log(currentQuestion < quiz.questions.length);
-    console.log(`Current Question Index: ${currentQuestion}`);
   };
 
   // Handle moving to the previous question
@@ -91,9 +91,9 @@ export default function QuizForm({ quiz }: { quiz: Quiz }) {
     });
 
     const submissionData = {
+      quizId:quizId,
       student: studentInfo?.name,
       studentId: studentInfo?.id,
-      quizId: quiz.id, // Assume `quiz.id` exists in your Quiz type
       answers: quiz.questions.map((q, index) => ({
         questionNumber: index + 1,
         questionText: q.question,
@@ -101,8 +101,7 @@ export default function QuizForm({ quiz }: { quiz: Quiz }) {
         time: timeSpent[index] || 0,
       })),
     };
-
-    console.log(submissionData);
+    console.log(saveDoc('answers',submissionData));
   };
 
   const restartQuiz = () => {
@@ -123,7 +122,6 @@ export default function QuizForm({ quiz }: { quiz: Quiz }) {
     return <StudentInfoCard onSubmit={handleStudentInfoSubmit} />;
   }
   if (quizSubmitted) {
-    console.log(timeSpent);
     return (
       <div className="flex items-center justify-center min-h-screen">
         <div className="container mx-auto p-4">
