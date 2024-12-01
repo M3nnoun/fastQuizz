@@ -131,8 +131,8 @@ export default function QuizForm({ quiz,quizId }: { quiz: Quiz,quizId: string })
                 Quiz Results
               </CardTitle>
               <CardDescription>
-                {studentInfo.name} (ID: {studentInfo.id}), you've completed the
-                quiz about Moroccan family values. Here's your score:
+                {studentInfo.name} (ID: {studentInfo.id}), you &apos; ve completed the
+                quiz about Moroccan family values. Here &apos; s your score:
               </CardDescription>
             </CardHeader>
             <CardContent>

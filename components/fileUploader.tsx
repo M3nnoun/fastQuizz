@@ -13,8 +13,6 @@ import { collection, addDoc } from 'firebase/firestore';
 export default function FileUploader({ afterSubmit }: { afterSubmit: (slug: string) => void }) {
   const [file, setFile] = useState<File | null>(null);
   const [prompt, setPrompt] = useState('');
-  const [error, setError] = useState<string | null>(null);
-  const [response, setResponse] = useState<string | null>(null);
   // Handle file selection
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
   const selectedFile = event.target.files?.[0];
@@ -45,24 +43,23 @@ export default function FileUploader({ afterSubmit }: { afterSubmit: (slug: stri
     try {
       const result = await uploadAndProcessFile(formData);
       if (result.error) {
-        setError(result.error);
+        console.log(result.error);
       } else {
-        setResponse(result.response);
         const responseDoc = {
           userid:'placeholder',
           prompt,
-          questions: JSON.parse(result.response),
+          questions: JSON.parse(result?.response),
           fileName: file.name,
           uploadedAt: new Date(),
         };
         const docRef = await addDoc(collection(db, "quizes"), responseDoc);
         console.log("Document written with ID: ", docRef.id);
         afterSubmit(docRef.id);
-        console.log(JSON.parse(result.response));
+        console.log(JSON.parse(result!,.response));
       }
     } catch (error: any) {
       console.error(error);
-      setError("Something went wrong");
+      console.log("Something went wrong");
     }
   };
   
