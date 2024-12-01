@@ -64,6 +64,7 @@ export async function uploadAndProcessFile(formData: FormData) {
       status: 201,
       response: clearReponse,
     };
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error: unknown) {
     console.error("Error occurred:", error);
     return {
