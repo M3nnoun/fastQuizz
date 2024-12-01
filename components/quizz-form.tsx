@@ -18,7 +18,7 @@ import { StudentInfoCard } from "./student-info-card";
 import { saveDoc } from '@/app/actions';
 
 
-export default function QuizForm({ quiz,quizId }: { quiz: Quiz,quizId: string }) {
+export default function QuizForm({ quiz,quizId }: { quiz: Quiz,quizId: string |null}) {
   // this a bug i will fix it later
   // this code not show the last Item,
   // i will dipplicate the last item

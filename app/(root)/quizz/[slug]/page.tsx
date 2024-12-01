@@ -13,8 +13,8 @@ export default function Page({
 }) {
   const [quiz, setQuiz] = useState<Quiz | null>(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [quizId, setquizId] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>('');
+  const [quizId, setquizId] = useState<string | null>('');
   
   useEffect(() => {
     const fetchData = async () => {
@@ -36,9 +36,9 @@ export default function Page({
         } else {
           throw new Error("Document not found");
         }
-      } catch (err: any) {
+      } catch (err:unknown) {
         console.error(err);
-        setError(err.message || "Failed to fetch document");
+        setError(err?.message || "Failed to fetch document");
       } finally {
         setLoading(false);
       }
