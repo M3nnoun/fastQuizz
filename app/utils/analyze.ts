@@ -2,7 +2,7 @@ import { Quiz, QuizAnswer } from "@/types/quiz";
 import { QuestionStatistics } from "@/types/statistiques";
 
 export function calculateStudentsData(
-  studentResponses: QuizAnswer,
+  studentResponses: QuizAnswer[],
   quizData: Quiz
 ) {
   return studentResponses.map((student) => {
