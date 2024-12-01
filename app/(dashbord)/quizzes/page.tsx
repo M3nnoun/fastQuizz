@@ -1,6 +1,6 @@
-import { getAllQuizzes } from '@/app/actions';
+import { getAllQuizzes } from "@/app/actions";
 // import { Header } from '@/components/header-dashbord'
-import { QuizCard } from '@/components/quiz-card'
+import { QuizCard } from "@/components/quiz-card";
 
 // This would typically come from an API or database
 
@@ -36,9 +36,9 @@ export default function Dashboard() {
       <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <h1 className="text-3xl font-bold text-gray-900 mb-6">Your Quizzes</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {quizzes.map((quiz) => (
+          {quizzes.map((quiz, index) => (
             <QuizCard
-              key={quiz.id}
+              key={index} // Use the index as the key
               title={quiz.fileName}
               description={quiz.prompt}
               questionCount={quiz.questions.length}
@@ -48,6 +48,5 @@ export default function Dashboard() {
         </div>
       </main>
     </div>
-  )
+  );
 }
-

@@ -6,7 +6,7 @@ interface QuizCardProps {
   title: string
   description: string
   questionCount: number
-  createdAt: string
+  createdAt: Date
 }
 
 export function QuizCard({ title, description, questionCount, createdAt }: QuizCardProps) {
@@ -18,7 +18,7 @@ export function QuizCard({ title, description, questionCount, createdAt }: QuizC
       </CardHeader>
       <CardContent>
         <p className="text-sm text-gray-500">Questions: {questionCount}</p>
-        <p className="text-sm text-gray-500">Created: {createdAt}</p>
+        <p className="text-sm text-gray-500">Created: {createdAt.toLocaleString()}</p>
       </CardContent>
       <CardFooter className="flex justify-between">
         <Button variant="outline">Edit</Button>

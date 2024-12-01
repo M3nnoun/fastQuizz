@@ -12,7 +12,7 @@ import {
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import { Quiz, QuizQuestion } from "@/types/quiz";
+import { Quiz, QuizQuestion, StudentInfo } from "@/types/quiz";
 import { useToast } from "@/hooks/use-toast";
 import { StudentInfoCard } from "./student-info-card";
 import { saveDoc } from '@/app/actions';
