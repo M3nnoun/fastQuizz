@@ -55,9 +55,9 @@ export default function FileUploader({ afterSubmit }: { afterSubmit: (slug: stri
         const docRef = await addDoc(collection(db, "quizes"), responseDoc);
         console.log("Document written with ID: ", docRef.id);
         afterSubmit(docRef.id);
-        console.log(JSON.parse(result!,.response));
+        // console.log(JSON.parse(result!,.response));
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error(error);
       console.log("Something went wrong");
     }
