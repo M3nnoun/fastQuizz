@@ -64,11 +64,11 @@ export async function uploadAndProcessFile(formData: FormData) {
       status: 201,
       response: clearReponse,
     };
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Error occurred:", error);
     return {
       error: "File upload failed",
-      details: error.message,
+      // details: error?.message,
       status: 500,
     };
   }
@@ -109,7 +109,7 @@ export async function getAllQuizzes(): Promise<Quiz[]> {
         questions: data.questions,
         uploadedAt: formatDate(data.uploadedAt?.toDate()), // Convert Firestore Timestamp to JS Date
         userid: data.userid,
-      } as Quiz;
+      } as unknown as Quiz;
     });
     console.log(quizzes);
 

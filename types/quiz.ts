@@ -8,7 +8,7 @@ export interface QuizQuestion {
     fileName:string;
     prompt:string;
     questions: QuizQuestion[];
-    uploadedAt:Date;
+    uploadedAt:string;
     userid:string;
   }
   
