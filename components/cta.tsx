@@ -14,7 +14,7 @@ export const CTA = () => (
           Ready to simplify your teaching workflow?
           </h3>
           <p className="text-lg leading-relaxed tracking-tight text-muted-foreground max-w-xl">
-          Create quizzes in minutes and gain valuable insights into your class's performance.  
+          Create quizzes in minutes and gain valuable insights into your class&apos;s performance.  
           Take the first step today!
           </p>
         </div>
