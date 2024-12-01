@@ -1,6 +1,5 @@
 import { Quiz, QuizAnswer } from "@/types/quiz";
 import { QuestionStatistics } from "@/types/statistiques";
-import { average } from "@firebase/firestore";
 
 export function calculateStudentsData(
   studentResponses: QuizAnswer,
