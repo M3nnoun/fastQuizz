@@ -93,13 +93,12 @@ export default function FileUploader({afterSubmit}) {
               {file && <p className="text-sm text-muted-foreground">Selected file: {file.name}</p>}
             </div>
             <div className="space-y-2">
-              <Label htmlFor="prompt">Enter your prompt</Label>
-              <Textarea
+              <Label htmlFor="prompt">Quiz title</Label>
+              <Input 
                 id="prompt"
-                placeholder="Type your instructions or questions here..."
+                placeholder="Type your quiz Title."
                 value={prompt}
                 onChange={(e) => setPrompt(e.target.value)}
-                rows={4}
               />
             </div>
           </div>
