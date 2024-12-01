@@ -5,15 +5,15 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import { GoogleAIFileManager } from "@google/generative-ai/server";
 import fs from "fs";
 import path from 'path';
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc,getDocs, query, where, getDoc, doc  } from "firebase/firestore";
 import  db  from '@/app/utils/fireStore';
-
+import { Quiz, QuizAnswer } from "@/types/quiz";
 
 export async function uploadAndProcessFile(formData: FormData) {
   try {
     // Extract file from the FormData
     const file = formData.get("file");
-    const uploadDir = path.join("app/demo/", 'uploads');
+    const uploadDir = path.join("app/", 'uploads');
     const tempFilePath = path.join(uploadDir, 'tempfile.pdf');
     console.log("Upload Directory: ", uploadDir);
     console.log("File Path: ", tempFilePath);
@@ -90,3 +90,85 @@ export async function saveDoc(collectionName: string, data: object): Promise<str
     throw error;
   }
 }
+
+function formatDate(date: Date): string {
+  return new Intl.DateTimeFormat("en-GB").format(date);
+}
+
+export async function getAllQuizzes(): Promise<Quiz[]> {
+  try {
+    const quizesCollection = collection(db, "quizes");
+    const querySnapshot = await getDocs(quizesCollection);
+
+    // Map through the documents and convert them into Quiz objects
+    const quizzes: Quiz[] = querySnapshot.docs.map((doc) => {
+      const data = doc.data();
+      return {
+        fileName: data.fileName,
+        prompt: data.prompt,
+        questions: data.questions,
+        uploadedAt: formatDate(data.uploadedAt?.toDate()), // Convert Firestore Timestamp to JS Date
+        userid: data.userid,
+      } as Quiz;
+    });
+    console.log(quizzes);
+
+    return quizzes;
+  } catch (error) {
+    console.error("Error fetching quizzes:", error);
+    throw new Error(`Failed to fetch quizzes: ${error}`);
+  }
+}
+
+export async function getQuizAnswers(quizId: string): Promise<QuizAnswer[]> {
+  try {
+    const quizAnswersCollection = collection(db, "answers");
+    const q = query(quizAnswersCollection, where("quizId", "==", quizId));
+    const querySnapshot = await getDocs(q);
+
+    const answers: QuizAnswer[] = querySnapshot.docs.map((doc) => ({
+      id: doc.id, // Optional, remove if not needed
+      ...doc.data(),
+    })) as unknown as QuizAnswer[];
+
+    return answers;
+  } catch (error) {
+    console.error("Error fetching quiz answers:", error);
+    throw new Error(`Failed to fetch quiz answers: ${error}`);
+  }
+}
+
+
+export async function getQuizz(quizId: string): Promise<Quiz> {
+  try {
+    // Reference to the specific quiz document using the quizId
+    const quizDocRef = doc(db, "quizes", quizId);
+    const docSnapshot = await getDoc(quizDocRef);
+
+    if (!docSnapshot.exists()) {
+      throw new Error(`Quiz with ID ${quizId} not found`);
+    }
+
+    // Convert Firestore document to Quiz object
+    const data = docSnapshot.data();
+    if (!data) {
+      throw new Error("No data found in the document");
+    }
+
+    const quiz: Quiz = {
+      fileName: data.fileName,
+      prompt: data.prompt,
+      questions: data.questions,
+      uploadedAt: formatDate(data.uploadedAt?.toDate()), // Convert Firestore Timestamp to JS Date
+      userid: data.userid,
+    };
+
+    return quiz;
+  } catch (error) {
+    console.error("Error fetching quiz:", error);
+    throw new Error(`Failed to fetch quiz: ${error}`);
+  }
+}
+
+
+

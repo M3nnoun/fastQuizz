@@ -1,0 +1,108 @@
+{
+  "fileName": "Production écrite _ Le rôle de la mère dans la famille marocaine.pdf",
+  "prompt": "hello this is test",
+  "questions": [
+    {
+      "question": "According to the text, what is the central role of the family in Moroccan society?",
+      "answer": "It is the foundation of social life.",
+      "options": [
+        "It is a source of economic stability.",
+        "It is the foundation of social life.",
+        "It is a place for individual expression.",
+        "It is a means of political power."
+      ]
+    },
+    {
+      "question": "What is the mother's primary role in the Moroccan family, as described in the text?",
+      "answer": "Pillar of stability and support, providing love and care",
+      "options": [
+        "Financial provider",
+        "Social organizer",
+        "Pillar of stability and support, providing love and care",
+        "Disciplinarian and rule enforcer"
+      ]
+    },
+    {
+      "question": "Beyond emotional support, what other key role does the mother play within the family?",
+      "answer": "She actively participates in household management and daily routines.",
+      "options": [
+        "She solely manages finances.",
+        "She actively participates in community politics.",
+        "She actively participates in household management and daily routines.",
+        "She focuses primarily on the education of the sons."
+      ]
+    },
+    {
+      "question": "What values does the mother instill in her children, according to the text?",
+      "options": [
+        "Wealth accumulation and social status",
+        "Respect, solidarity, and honesty",
+        "Individual ambition and competition",
+        "Blind obedience and unquestioning loyalty"
+      ],
+      "answer": "Respect, solidarity, and honesty"
+    },
+    {
+      "answer": "They take on jobs outside the home.",
+      "options": [
+        "They dedicate their time to religious studies.",
+        "They solely focus on their children's education.",
+        "They take on jobs outside the home.",
+        "They engage in extensive community service."
+      ],
+      "question": "In addition to her domestic responsibilities, what other role do many Moroccan mothers now undertake?"
+    },
+    {
+      "options": [
+        "She has limited influence beyond her immediate family.",
+        "She transmits values and traditions across generations.",
+        "She actively discourages adherence to traditional values.",
+        "She has little involvement in the family's future."
+      ],
+      "question": "How does the text describe the mother's influence across generations?",
+      "answer": "She transmits values and traditions across generations."
+    },
+    {
+      "question": "What is the overall conclusion about the mother's role in Moroccan society?",
+      "answer": "It is crucial and deserving of respect and gratitude.",
+      "options": [
+        "It is gradually declining in importance.",
+        "It is primarily defined by religious roles.",
+        "It is crucial and deserving of respect and gratitude.",
+        "It is increasingly limited to the home."
+      ]
+    },
+    {
+      "answer": "Wisdom and guidance",
+      "question": "The text emphasizes the mother's role as a source of what, besides emotional support?",
+      "options": [
+        "Financial wealth",
+        "Political influence",
+        "Wisdom and guidance",
+        "Social connections"
+      ]
+    },
+    {
+      "options": [
+        "Financial independence",
+        "Remarkable adaptability",
+        "Superior education",
+        "Extensive social networks"
+      ],
+      "answer": "Remarkable adaptability",
+      "question": "What characteristic of Moroccan mothers is highlighted in the text's description of their ability to manage both home and work responsibilities?"
+    },
+    {
+      "answer": "Cultural tradition",
+      "question": "The text implies that expressing gratitude and respect towards mothers is a matter of:",
+      "options": [
+        "Personal choice",
+        "Cultural tradition",
+        "Religious obligation",
+        "Legal requirement"
+      ]
+    }
+  ],
+  "uploadedAt": "27/11/2024",
+  "userid": "placeholder"
+}

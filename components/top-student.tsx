@@ -17,8 +17,6 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart"
-import { evaluateStudents } from "@/app/utils/analyze"
-
 
 const chartConfig = {
   desktop: {

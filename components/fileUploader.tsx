@@ -4,14 +4,13 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { FileUp, Send } from 'lucide-react';
 import { uploadAndProcessFile } from '@/app/actions';
 import  db  from '@/app/utils/fireStore';
 import { collection, addDoc } from 'firebase/firestore';
 
-export default function FileUploader({afterSubmit}) {
+export default function FileUploader({ afterSubmit }: { afterSubmit: (slug: string) => void }) {
   const [file, setFile] = useState<File | null>(null);
   const [prompt, setPrompt] = useState('');
   const [error, setError] = useState<string | null>(null);
