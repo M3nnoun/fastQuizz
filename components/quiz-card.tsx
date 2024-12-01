@@ -6,7 +6,7 @@ interface QuizCardProps {
   title: string
   description: string
   questionCount: number
-  createdAt: Date
+  createdAt: string
 }
 
 export function QuizCard({ title, description, questionCount, createdAt }: QuizCardProps) {
