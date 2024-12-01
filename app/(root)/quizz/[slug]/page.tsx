@@ -36,9 +36,13 @@ export default function Page({
         } else {
           throw new Error("Document not found");
         }
-      } catch (err:unknown) {
+      }catch (err: unknown) {
         console.error(err);
-        setError(err?.message || "Failed to fetch document");
+        if (err instanceof Error) {
+          setError(err.message || "Failed to fetch document");
+        } else {
+          setError("Failed to fetch document");
+        }
       } finally {
         setLoading(false);
       }
