@@ -25,6 +25,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import { Totals } from "@/types/statistiques"
 
 
 const chartConfig = {
@@ -42,16 +43,16 @@ const chartConfig = {
     },
   } satisfies ChartConfig;
     // eslint-disable-next-line react-hooks/exhaustive-deps
-export function CorrectPie({ totals }) {
+export function CorrectPie({ totals }:{totals:Totals}) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    Object.keys(totals).forEach((key) => {
-        totals[key] = parseFloat(totals[key].toFixed(2));
-      });
-      console.log(totals);
+    const updatedTotals = Object.fromEntries(
+      Object.entries(totals).map(([key, value]) => [key, parseFloat(value.toFixed(2))])
+    ) as typeof totals;
+    
     const desktopData = [
-        { month: "Correct", desktop: totals.totalCorrect, fill: chartConfig.Correct.color },
-        { month: "Skipp", desktop: totals.totalSkipped, fill: chartConfig.Skipp.color },
-        { month: "Wrong", desktop: totals.totalWrong, fill: chartConfig.Wrong.color },
+        { month: "Correct", desktop: updatedTotals.totalCorrect, fill: chartConfig.Correct.color },
+        { month: "Skipp", desktop: updatedTotals.totalSkipped, fill: chartConfig.Skipp.color },
+        { month: "Wrong", desktop: updatedTotals.totalWrong, fill: chartConfig.Wrong.color },
       ];
       
   const id = "pie-interactive"

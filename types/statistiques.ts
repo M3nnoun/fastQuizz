@@ -4,4 +4,10 @@ export type QuestionStatistics = {
     skiped: { [key: number]: number };
     wrong: { [key: number]: number };
   };
+
+  export type Totals = {
+    totalCorrect: number;
+    totalSkipped: number;
+    totalWrong: number;
+  };
   
