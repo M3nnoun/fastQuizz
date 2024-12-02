@@ -31,9 +31,9 @@ export async function uploadAndProcessFile(formData: FormData) {
     fs.writeFileSync(tempFilePath, buffer);
 
     // Initialize GoogleGenerativeAI with your API_KEY.
-    const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY);
+    const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY!);
     // Initialize GoogleAIFileManager with your API_KEY.
-    const fileManager = new GoogleAIFileManager(process.env.GOOGLE_API_KEY);
+    const fileManager = new GoogleAIFileManager(process.env.GOOGLE_API_KEY!);
 
     // Generate AI content
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
