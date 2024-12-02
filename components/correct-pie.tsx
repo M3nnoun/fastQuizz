@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { Label, Pie, PieChart, Sector } from "recharts"
-import { PieSectorDataItem } from "recharts/types/polar/Pie"
+import * as React from "react";
+import { Label, Pie, PieChart, Sector } from "recharts";
+import { PieSectorDataItem } from "recharts/types/polar/Pie";
 
 import {
   Card,
@@ -10,59 +10,76 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
+} from "@/components/ui/card";
 import {
   ChartConfig,
   ChartContainer,
   ChartStyle,
   ChartTooltip,
   ChartTooltipContent,
-} from "@/components/ui/chart"
+} from "@/components/ui/chart";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
-import { Totals } from "@/types/statistiques"
-
+} from "@/components/ui/select";
+import { Totals } from "@/types/statistiques";
 
 const chartConfig = {
-    Correct: {
-      label: "Correct",
-      color: "#1ea55c",
+  Correct: {
+    label: "Correct",
+    color: "#1ea55c",
+  },
+  Skipp: {
+    label: "Skipp",
+    color: "#FFBF00",
+  },
+  Wrong: {
+    label: "Wrong",
+    color: "#fe5554",
+  },
+} satisfies ChartConfig;
+// eslint-disable-next-line react-hooks/exhaustive-deps
+export function CorrectPie({ totals }: { totals: Totals }) {
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const updatedTotals = Object.fromEntries(
+    Object.entries(totals).map(([key, value]) => [
+      key,
+      parseFloat(value.toFixed(2)),
+    ])
+  ) as typeof totals;
+
+  const desktopData = [
+    {
+      month: "Correct",
+      desktop: updatedTotals.totalCorrect,
+      fill: chartConfig.Correct.color,
     },
-    Skipp: {
-      label: "Skipp",
-      color: "#FFBF00",
+    {
+      month: "Skipp",
+      desktop: updatedTotals.totalSkipped,
+      fill: chartConfig.Skipp.color,
     },
-    Wrong: {
-      label: "Wrong",
-      color: "#fe5554",
+    {
+      month: "Wrong",
+      desktop: updatedTotals.totalWrong,
+      fill: chartConfig.Wrong.color,
     },
-  } satisfies ChartConfig;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-export function CorrectPie({ totals }:{totals:Totals}) {
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    const updatedTotals = Object.fromEntries(
-      Object.entries(totals).map(([key, value]) => [key, parseFloat(value.toFixed(2))])
-    ) as typeof totals;
-    
-    const desktopData = [
-        { month: "Correct", desktop: updatedTotals.totalCorrect, fill: chartConfig.Correct.color },
-        { month: "Skipp", desktop: updatedTotals.totalSkipped, fill: chartConfig.Skipp.color },
-        { month: "Wrong", desktop: updatedTotals.totalWrong, fill: chartConfig.Wrong.color },
-      ];
-      
-  const id = "pie-interactive"
-  const [activeMonth, setActiveMonth] = React.useState(desktopData[0].month)
+  ];
+
+  const id = "pie-interactive";
+  const [activeMonth, setActiveMonth] = React.useState(desktopData[0].month);
 
   const activeIndex = React.useMemo(
     () => desktopData.findIndex((item) => item.month === activeMonth),
     [activeMonth, desktopData]
-  )
-  const months = React.useMemo(() => desktopData.map((item) => item.month), [desktopData]);
+  );
+  const months = React.useMemo(
+    () => desktopData.map((item) => item.month),
+    [desktopData]
+  );
 
   return (
     <Card data-chart={id} className="flex flex-col">
@@ -81,10 +98,10 @@ export function CorrectPie({ totals }:{totals:Totals}) {
           </SelectTrigger>
           <SelectContent align="end" className="rounded-xl">
             {months.map((key) => {
-              const config = chartConfig[key as keyof typeof chartConfig]
+              const config = chartConfig[key as keyof typeof chartConfig];
 
               if (!config) {
-                return null
+                return null;
               }
 
               return (
@@ -97,13 +114,13 @@ export function CorrectPie({ totals }:{totals:Totals}) {
                     <span
                       className="flex h-3 w-3 shrink-0 rounded-sm"
                       style={{
-                        backgroundColor: `${key.color}`,
+                        backgroundColor: `${config.color}`,
                       }}
                     />
                     {config?.label}
                   </div>
                 </SelectItem>
-              )
+              );
             })}
           </SelectContent>
         </Select>
@@ -165,7 +182,7 @@ export function CorrectPie({ totals }:{totals:Totals}) {
                           answers
                         </tspan>
                       </text>
-                    )
+                    );
                   }
                 }}
               />
@@ -174,5 +191,5 @@ export function CorrectPie({ totals }:{totals:Totals}) {
         </ChartContainer>
       </CardContent>
     </Card>
-  )
+  );
 }

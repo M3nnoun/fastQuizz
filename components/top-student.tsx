@@ -25,7 +25,7 @@ const chartConfig = {
   },
 } satisfies ChartConfig
 
-export function StudentsTop(data) {
+export function StudentsTop(data: { data: any }) {
     // const chartData = [
     //     { month: "January", desktop: 186 },
     //     { month: "February", desktop: 305 },
