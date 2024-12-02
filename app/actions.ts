@@ -12,9 +12,15 @@ import { Quiz, QuizAnswer } from "@/types/quiz";
 export async function uploadAndProcessFile(formData: FormData) {
   try {
     // Extract file from the FormData
-    const file = formData.get("file");
+    const file = formData.get("file")as File;
     // const uploadDir = path.join("app/", 'uploads');
-    const tempFilePath = path.join("/tmp", 'tempfile.pdf');
+    let tempFilePath='';
+    if (process.env.dev && process.env.dev=='YES'){
+      tempFilePath = path.join("./tmp/", 'tempfile.pdf');
+    }else{
+      const data = await file.arrayBuffer();
+      tempFilePath=path.join("/tmp/", 'tempfile.pdf');
+    }
     // console.log("Upload Directory: ", uploadDir);
     console.log("File Path: ", tempFilePath);
     // Validate file presence
