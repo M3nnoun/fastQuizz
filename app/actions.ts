@@ -15,7 +15,7 @@ export async function uploadAndProcessFile(formData: FormData) {
     const file = formData.get("file")as File;
     // const uploadDir = path.join("app/", 'uploads');
     let tempFilePath='';
-    if (process.env.dev && process.env.dev=='YES'){
+    if (process.env.DEV && process.env.DEV=='YES'){
       tempFilePath = path.join("./tmp/", 'tempfile.pdf');
     }else{
       const data = await file.arrayBuffer();
