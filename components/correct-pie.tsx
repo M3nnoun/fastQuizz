@@ -41,7 +41,7 @@ const chartConfig = {
       color: "#fe5554",
     },
   } satisfies ChartConfig;
-
+    // eslint-disable-next-line react-hooks/exhaustive-deps
 export function CorrectPie({ totals }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     Object.keys(totals).forEach((key) => {
