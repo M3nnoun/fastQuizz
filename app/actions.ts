@@ -13,9 +13,9 @@ export async function uploadAndProcessFile(formData: FormData) {
   try {
     // Extract file from the FormData
     const file = formData.get("file");
-    const uploadDir = path.join("app/", 'uploads');
-    const tempFilePath = path.join(uploadDir, 'tempfile.pdf');
-    console.log("Upload Directory: ", uploadDir);
+    // const uploadDir = path.join("app/", 'uploads');
+    const tempFilePath = path.join("/tmp", 'tempfile.pdf');
+    // console.log("Upload Directory: ", uploadDir);
     console.log("File Path: ", tempFilePath);
     // Validate file presence
     if (!file || !(file instanceof File)) {
