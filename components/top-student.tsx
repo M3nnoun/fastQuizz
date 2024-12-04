@@ -17,30 +17,51 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart"
+import { evaluateStudents } from "@/app/utils/analyze"
+
 
 const chartConfig = {
-  desktop: {
-    label: "Desktop",
+  visitors: {
+    label: "Visitors",
+  },
+  chrome: {
+    label: "Chrome",
     color: "hsl(var(--chart-1))",
+  },
+  safari: {
+    label: "Safari",
+    color: "hsl(var(--chart-2))",
+  },
+  firefox: {
+    label: "Firefox",
+    color: "hsl(var(--chart-3))",
+  },
+  edge: {
+    label: "Edge",
+    color: "hsl(var(--chart-4))",
+  },
+  other: {
+    label: "Other",
+    color: "hsl(var(--chart-5))",
   },
 } satisfies ChartConfig
 
 export function StudentsTop(data: { data: any }) {
-    // const chartData = [
-    //     { month: "January", desktop: 186 },
-    //     { month: "February", desktop: 305 },
-    //     { month: "March", desktop: 237 },
-    //     { month: "April", desktop: 73 },
-    //     { month: "May", desktop: 209 },
-    //     { month: "June", desktop: 214 },
-    //   ]
-    console.log(data)
-    const chartData=data.data;
-    // evaluateStudents(data);
+  // const chartData = [
+  //   { browser: "chrome", visitors: 275, fill: "var(--color-chrome)" },
+  //   { browser: "safari", visitors: 200, fill: "var(--color-safari)" },
+  //   { browser: "firefox", visitors: 187, fill: "var(--color-firefox)" },
+  //   { browser: "edge", visitors: 173, fill: "var(--color-edge)" },
+  //   { browser: "other", visitors: 90, fill: "var(--color-other)" },
+  // ]
+  console.log(data)
+  const stdentsEve5 = evaluateStudents(data.data).slice(0, 7);
+
+  const chartData=stdentsEve5;
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Bar Chart - Horizontal</CardTitle>
+        <CardTitle>Bar Chart - Mixed</CardTitle>
         <CardDescription>January - June 2024</CardDescription>
       </CardHeader>
       <CardContent>
@@ -50,23 +71,25 @@ export function StudentsTop(data: { data: any }) {
             data={chartData}
             layout="vertical"
             margin={{
-              left: -20,
+              left: 0,
             }}
           >
-            <XAxis type="number" dataKey="student" hide />
             <YAxis
               dataKey="student"
               type="category"
               tickLine={false}
               tickMargin={10}
               axisLine={false}
-              tickFormatter={(value) => value.slice(0, 3)}
+              tickFormatter={(value) =>
+                chartConfig[value as keyof typeof chartConfig]?.label
+              }
             />
+            <XAxis dataKey="score" type="number" hide />
             <ChartTooltip
               cursor={false}
               content={<ChartTooltipContent hideLabel />}
             />
-            <Bar dataKey="desktop" fill="var(--color-desktop)" radius={5} />
+            <Bar dataKey="score" layout="vertical" radius={5} />
           </BarChart>
         </ChartContainer>
       </CardContent>

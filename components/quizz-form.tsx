@@ -160,7 +160,7 @@ export default function QuizForm({ quiz,quizId }: { quiz: Quiz,quizId: string |n
     <div className="flex items-center justify-center min-h-screen">
       <div className="container mx-auto p-4">
         <h1 className="mb-6 text-center text-3xl font-bold">
-          Moroccan Family Values Quiz
+          {quiz.prompt}
         </h1>
         <p className="mb-4 text-center">
           Student: {studentInfo.name} (ID: {studentInfo.id})

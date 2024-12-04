@@ -34,7 +34,7 @@ export const Header = () => {
   // flex justify-start items-start
 
   const [isOpen, setOpen] = useState(false);
-  
+
   return (
     <header className="w-full z-40 fixed top-0 left-0 bg-background">
       <div className="container max-w-[80rem] mx-auto min-h-20 flex gap-4 flex-row lg:grid lg:grid-cols-3 items-center sm:px-1 md:px-8 lg:px-12">
@@ -88,10 +88,10 @@ export const Header = () => {
             </NavigationMenuList>
           </NavigationMenu> */}
           <div className="flex justify-start items-start space-x-8">
-          <Link href='/'>Home</Link>
-          <Link href='/'>Features</Link>
-          <Link href='/'>Pricing</Link>
-          <Link href='/'>FAQ</Link>
+            <Link href="/">Home</Link>
+            <Link href="/">Features</Link>
+            <Link href="/">Pricing</Link>
+            <Link href="/">FAQ</Link>
           </div>
         </div>
         <div className="flex lg:justify-center">
@@ -103,7 +103,9 @@ export const Header = () => {
           </Button>
           <div className="border-r hidden md:inline"></div>
           <Button variant="outline">Sign in</Button>
-          <Button>Get started</Button>
+          <Link href="/demo">
+            <Button>Get started</Button>
+          </Link>
         </div>
         <div className="flex w-12 shrink lg:hidden items-end justify-end">
           <Button variant="ghost" onClick={() => setOpen(!isOpen)}>
@@ -142,13 +144,20 @@ export const Header = () => {
                 </div>
               ))} */}
               <div className="flex flex-col gap-2">
-          <Link href='/' className="flex justify-between items-center"><span className="text-lg">Home</span>
-          <MoveRight className="w-4 h-4 stroke-1 text-muted-foreground" />
-          </Link>
-          <Link href='/'className="text-lg">Features</Link>
-          <Link href='/'className="text-lg">Pricing</Link>
-          <Link href='/'className="text-lg">FAQ</Link>
-          </div>
+                <Link href="/" className="flex justify-between items-center">
+                  <span className="text-lg">Home</span>
+                  <MoveRight className="w-4 h-4 stroke-1 text-muted-foreground" />
+                </Link>
+                <Link href="/" className="text-lg">
+                  Features
+                </Link>
+                <Link href="/" className="text-lg">
+                  Pricing
+                </Link>
+                <Link href="/" className="text-lg">
+                  FAQ
+                </Link>
+              </div>
             </div>
           )}
         </div>
